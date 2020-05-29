@@ -17,6 +17,13 @@ def wd_ff(request):
 
 
 @pytest.fixture
+def wd_ff_nightly(request):
+    wd = webdriver.Firefox(firefox_binary="C:/Program Files/Firefox Nightly/firefox.exe")
+    request.addfinalizer(wd.quit)
+    return wd
+
+
+@pytest.fixture
 def wd_ie(request):
     wd = webdriver.Ie()
     request.addfinalizer(wd.quit)
