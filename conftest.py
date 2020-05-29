@@ -11,7 +11,16 @@ def wd_ch(request):
 
 @pytest.fixture
 def wd_ff(request):
-    wd = webdriver.Firefox()
+    wd = webdriver.Firefox(firefox_binary="C:/Program Files/Mozilla Firefox/firefox.exe")
+    request.addfinalizer(wd.quit)
+    return wd
+
+
+@pytest.fixture
+def wd_ff_esr(request):
+    wd = webdriver.Firefox(
+        firefox_binary="C:/Program Files/Mozilla Firefox ESR/firefox.exe",
+        capabilities={"marionette": False})
     request.addfinalizer(wd.quit)
     return wd
 
