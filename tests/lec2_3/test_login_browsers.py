@@ -1,8 +1,8 @@
-def test_login_chrome(wd_ch):
-    wd_ch.get("http://localhost/litecart/admin/")
-    wd_ch.find_element_by_name("username").send_keys("admin")
-    wd_ch.find_element_by_name("password").send_keys("admin")
-    wd_ch.find_element_by_name("login").click()
+def test_login_chrome(wd):
+    wd.get("http://localhost/litecart/admin/")
+    wd.find_element_by_name("username").send_keys("admin")
+    wd.find_element_by_name("password").send_keys("admin")
+    wd.find_element_by_name("login").click()
 
 
 def test_login_firefox(wd_ff):
