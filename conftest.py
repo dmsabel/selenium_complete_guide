@@ -15,7 +15,7 @@ def app(request):
 
 
 @pytest.fixture
-def wd(request):
+def wd_ch(request):
     wd = webdriver.Chrome()
     wd.implicitly_wait(2)
     request.addfinalizer(wd.quit)
