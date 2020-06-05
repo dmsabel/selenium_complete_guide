@@ -1,6 +1,18 @@
 import pytest
 from selenium import webdriver
 
+from application import Application
+
+fixture = Application()
+
+
+@pytest.fixture()
+def app(request):
+    def teardown():
+        fixture.wd.quit()
+    request.addfinalizer(teardown)
+    return fixture
+
 
 @pytest.fixture
 def wd(request):
