@@ -1,4 +1,5 @@
 from selenium import webdriver
+import os
 
 from helpers.auth import AuthHelper
 
@@ -15,4 +16,5 @@ class Application:
 
         self.wd.implicitly_wait(2)
 
+        self.base_path = os.path.dirname(os.path.abspath(__file__))
         self.auth = AuthHelper(self.wd)
