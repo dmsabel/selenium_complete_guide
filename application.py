@@ -13,6 +13,8 @@ class Application:
             self.wd = webdriver.Firefox(firefox_binary="C:/Program Files/Mozilla Firefox/firefox.exe")
         elif browser == "ie":
             self.wd = webdriver.Ie()
+        elif browser == "remote":
+            self.wd = webdriver.Remote("192.168.0.14:4444/wd/hub", desired_capabilities={"browserName": "chrome"})
 
         self.wd.implicitly_wait(2)
 
