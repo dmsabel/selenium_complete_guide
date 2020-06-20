@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
 
-@pytest.mark.parametrize('app', ["remote"], indirect=True)
+@pytest.mark.parametrize('app', ["cloud"], indirect=True)
 def test_positive(app):
     # Добавляем в корзину три товара
     for _ in range(3):

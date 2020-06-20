@@ -15,6 +15,22 @@ class Application:
             self.wd = webdriver.Ie()
         elif browser == "remote":
             self.wd = webdriver.Remote("192.168.0.14:4444/wd/hub", desired_capabilities={"browserName": "chrome"})
+        elif browser == "cloud":
+            # https://automate.browserstack.com/
+            browserstack_url = 'https://bsuser71559:r7PWQ2qs5fq7bwqzwzbx@hub-cloud.browserstack.com/wd/hub'
+
+            desired_cap = {
+                'os': 'Windows',
+                'os_version': '10',
+                'browser': 'Chrome',
+                'browser_version': '80',
+                'name': "bsuser71559's First Test"
+            }
+
+            self.wd = webdriver.Remote(
+                command_executor=browserstack_url,
+                desired_capabilities=desired_cap
+            )
 
         self.wd.implicitly_wait(2)
 
