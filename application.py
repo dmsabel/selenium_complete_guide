@@ -19,13 +19,17 @@ class MyListener(AbstractEventListener):
 class Application:
 
     def __init__(self, browser="chrome"):
+        desired_cap = {"proxy": {"proxyType": "MANUAL", "httpProxy": "localhost:8888"}}
+
         if browser == "chrome":
-            self.wd = EventFiringWebDriver(webdriver.Chrome(), MyListener())
+            self.wd = EventFiringWebDriver(webdriver.Chrome(desired_capabilities=desired_cap), MyListener())
         elif browser == "firefox":
             self.wd = EventFiringWebDriver(
-                webdriver.Firefox(firefox_binary="C:/Program Files/Mozilla Firefox/firefox.exe"), MyListener())
+                webdriver.Firefox(firefox_binary="C:/Program Files/Mozilla Firefox/firefox.exe",
+                                  desired_capabilities=desired_cap),
+                MyListener())
         elif browser == "ie":
-            self.wd = EventFiringWebDriver(webdriver.Ie(), MyListener())
+            self.wd = EventFiringWebDriver(webdriver.Ie(desired_capabilities=desired_cap), MyListener())
         elif browser == "remote":
             self.wd = webdriver.Remote("192.168.0.14:4444/wd/hub", desired_capabilities={"browserName": "chrome"})
         elif browser == "cloud":
