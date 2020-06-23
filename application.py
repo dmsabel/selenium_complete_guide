@@ -2,17 +2,30 @@ from selenium import webdriver
 import os
 
 from helpers.auth import AuthHelper
+from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
+
+
+class MyListener(AbstractEventListener):
+    def before_find(self, by, value, driver):
+        print(by, value)
+
+    def after_find(self, by, value, driver):
+        print(by, value, "found")
+
+    def on_exception(self, exception, driver):
+        print(exception)
 
 
 class Application:
 
     def __init__(self, browser="chrome"):
         if browser == "chrome":
-            self.wd = webdriver.Chrome()
+            self.wd = EventFiringWebDriver(webdriver.Chrome(), MyListener())
         elif browser == "firefox":
-            self.wd = webdriver.Firefox(firefox_binary="C:/Program Files/Mozilla Firefox/firefox.exe")
+            self.wd = EventFiringWebDriver(
+                webdriver.Firefox(firefox_binary="C:/Program Files/Mozilla Firefox/firefox.exe"), MyListener())
         elif browser == "ie":
-            self.wd = webdriver.Ie()
+            self.wd = EventFiringWebDriver(webdriver.Ie(), MyListener())
         elif browser == "remote":
             self.wd = webdriver.Remote("192.168.0.14:4444/wd/hub", desired_capabilities={"browserName": "chrome"})
         elif browser == "cloud":
