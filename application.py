@@ -4,6 +4,10 @@ import os
 from helpers.auth import AuthHelper
 from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
 
+from helpers.cart import CartPageHelper
+from helpers.item import ItemPageHelper
+from helpers.main import MainPageHelper
+
 
 class MyListener(AbstractEventListener):
     def before_find(self, by, value, driver):
@@ -52,4 +56,9 @@ class Application:
         self.wd.implicitly_wait(2)
 
         self.base_path = os.path.dirname(os.path.abspath(__file__))
+
+        # =========== HELPERS ===========
         self.auth = AuthHelper(self.wd)
+        self.main = MainPageHelper(self.wd)
+        self.cart = CartPageHelper(self.wd)
+        self.item = ItemPageHelper(self.wd)
